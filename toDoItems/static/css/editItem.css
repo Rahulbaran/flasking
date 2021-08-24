@@ -1,0 +1,82 @@
+.items--main {
+    width:90%;
+    min-width:20em;
+    margin:3em auto;
+}
+
+/******************
+FORM FOR ADDING ITEM
+******************/
+.item__form {
+    background-color:#fff;
+    box-shadow:5px 5px 30px rgba(0,0,0,.05);
+    padding:2.5em 2em;
+    border-radius:5px;
+    margin-bottom:1.5em;
+}
+.item__form legend {
+    display:inline-block;
+    font-size:1.6em;
+    color:orangered;
+    line-height:1.2;
+    margin-bottom:1em;
+    font-weight:600;
+    text-decoration:underline .12em currentColor;
+}
+.form__group {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    margin-bottom:1em;
+}
+.form__group label {
+    font-weight:600;
+    font-family:'Montserrat',sans-serif;
+    font-size:1.05em;
+}
+.form__group input {
+    font-size:.95em; 
+    font-family:'Poppins',sans-serif;
+    border:none;
+    padding:.5em .6em;
+    border:.1em solid #999;
+    outline:none;
+    width:100%;
+}
+.submit__btn {
+    font-size:1em; 
+    font-family:'Poppins',sans-serif;
+    border:none;
+    color:#fff;
+    font-weight:600;
+    background:none;
+    background-color:rgb(85, 29, 214);
+    padding:.5em 1.3em;
+    border-radius:.3em;
+    box-shadow:3px 3px 2px rgba(34, 25, 25, 0.3);
+    transition:transform 250ms, box-shadow 250ms;
+}
+.submit__btn:hover,
+.submit__btn:focus {
+    box-shadow:5px 5px 2px rgba(0,0,0,.25);
+    transform:translateY(-3px);
+    cursor:pointer;
+}
+
+
+
+
+/* *****************
+MEDIA QUERIES
+******************* */
+@media (min-width:769px) and (max-width:1279px){
+    .items--main {
+        width:75%;
+    }
+}
+@media (min-width:1280px) {
+    .items--main {
+        width:60%;
+    }
+}

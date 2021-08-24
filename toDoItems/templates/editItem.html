@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{%- block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/editItem.css')}}">
+{% endblock -%}
+
+{%- block body %}
+<main class="items--main">
+
+    <form method="post" class="item__form" autocomplete="off">
+        {{form.hidden_tag()}}
+        <legend>Edit your list item</legend>
+
+        <div class="form__group">
+            {{form.itemName.label}}
+            {{form.itemName(placeholder="item name")}}
+            {% if form.itemName.errors %}
+            {% for error in form.itemName.errors %}
+            <span class="error__msg">{{error}}</span>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form__submit">
+            {{form.submit(class="submit__btn")}}
+        </div>
+
+    </form>
+</main>
+{% endblock -%}

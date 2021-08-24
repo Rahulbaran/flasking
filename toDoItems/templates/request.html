@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{%- block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/request.css')}}">
+{% endblock -%}
+{%- block body %}
+<main class="main--container">
+
+    <form method="post" autocomplete="off" class="form">
+        {{form.hidden_tag()}}
+
+        <legend>Request to reset password </legend>
+
+        <div class="form__group">
+            {{form.email.label}}
+            {%- if form.email.errors %}
+            {{form.email(class='field__error')}}
+            {%- for error in form.email.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            {{form.email(placeholder='enter registered email address')}}
+            {% endif -%}
+        </div>
+
+        <div class="form__submit">
+            {{form.submit}}
+        </div>
+
+    </form>
+
+</main>
+{% endblock -%}

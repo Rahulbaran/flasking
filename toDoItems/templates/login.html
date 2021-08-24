@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+{% set active_page='login' %}
+{%- block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+{% endblock -%}
+{%- block body %}
+<main class="main--container">
+
+    <form method="post" autocomplete="off" class="form">
+        {{form.hidden_tag()}}
+
+        <legend>Login Form</legend>
+
+        <div class="form__group">
+            {{form.email.label}}
+            {%- if form.email.errors %}
+            {{form.email(class='field__error')}}
+            {%- for error in form.email.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            {{form.email(placeholder='enter registered email address')}}
+            {% endif -%}
+        </div>
+
+        <div class="form__group">
+            {{form.password.label}}
+            {%- if form.password.errors %}
+            {{form.password(class='field__error')}}
+            {%- for error in form.password.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            <div class="password__input__container">
+            {{form.password(placeholder='enter password', id="password-field")}}
+            <a class="show__password__btn" title="Show Password">
+                <i class="fa fa-eye password-icon"></i>
+            </a>
+            </div>
+            {% endif -%}
+
+            
+        </div>
+
+        <div class="form__remember__group">
+            {{form.remember}}
+            {{form.remember.label}}
+        </div>
+
+        <div class="form__submit">
+            {{form.submit}}
+        </div>
+
+        <a href="{{url_for('users.reset_request')}}" class="forgot__password__link">Forgot Password???</a>
+    </form>
+
+    <div class="register__link__container">
+        <p>Have not registered yet,<a href="{{url_for('users.register')}}" class="register__link"> register now</a></p>
+    </div>
+
+</main>
+{% endblock -%}
+
+{% block scripts %}
+<script>
+
+    /*********FUNCTIONALITY TO SHOW AND HIDE PASSWORD CHARACTERS*********/
+    const passwordField = document.getElementById('password-field');
+    const showBtn = document.querySelector('.show__password__btn');
+    const passwordIcon = document.querySelector('.password-icon');
+    let tracker = true;
+
+    // Function to change icon & also type of input field
+    const passwordFunc = (type,remove, add) => {
+        passwordField.setAttribute('type',type);
+        passwordIcon.classList.remove(remove);
+        passwordIcon.classList.add(add);
+    };
+
+    showBtn.addEventListener('click', function () {
+        if(tracker) {
+            passwordFunc('text', 'fa-eye', 'fa-eye-slash');
+            tracker = false;
+        } else {
+            passwordFunc('password', 'fa-eye-slash', 'fa-eye');
+            tracker = true;
+        }
+    })
+</script>
+{% endblock %}

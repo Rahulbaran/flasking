@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+{% set active_page='addItem' %}
+{%- block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/addItem.css')}}">
+{% endblock -%}
+{%- block body %}
+<main class="items--main">
+
+    <form method="post" class="item__form" autocomplete="off">
+        {{form.hidden_tag()}}
+        <legend>Add new list item</legend>
+
+        <div class="form__group">
+            {{form.itemName(placeholder="item name")}}
+            {% if form.itemName.errors %}
+            {% for error in form.itemName.errors %}
+            <span class="error__msg">{{error}}</span>
+            {% endfor %}
+            {% endif %}
+
+            {{form.submit(class="add__item__btn")}}
+        </div>
+
+    </form>
+
+    {%- if allItems.total > 0 %}  {# Checking if number of items is atleast one #}
+        <!-- USER ITEMS SECTION -->
+        <section class="items__section">
+            
+            <div class="items__heading__container">
+                <h3 class="itemname__heading heading">Itemname</h3>
+                <h3 class="itemdate__heading heading">Date (added item)</h3>
+                <h3 class="itemsButtons__heading heading">Buttons</h3>
+            </div>
+            
+            {%- for item in allItems.items %}
+            <div class="items__container">
+                <p class="itemname item">{{item.itemName}}</p>
+                <p class="itemdate item">{{item.itemDate.strftime('%d/%m/%Y')}}</p>
+
+                <div class="item__buttons__container item">
+                    <a href="{{url_for('items.edit_item',id=item.id)}}" class="edit__btn btn">Edit</a>
+                    <form action="{{url_for('items.delete_item',id=item.id)}}" method="post" class="delete__form">
+                        <input type="submit" value="Delete" class="delete__btn btn">
+                    </form>
+                </div>
+            </div>
+            {% endfor -%}
+
+
+            <!-- PAGINATION FOR THE ITEMS TO AVOID CREATING A LIST OF ITEMS IN SINGLE PAGE -->
+            <div class="pagination__container">
+                {%- if allItems.total > allItems.per_page %}
+
+                    <!-- for left edge -->
+                    {% if allItems.prev_num %}
+                        <a href="{{url_for('items.addItem',page=allItems.prev_num)}}" class="other__page page">&lt;</a>
+                    {% endif %}
+
+                    {%- for page_num in allItems.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}          
+                        {%- if page_num %}
+
+                            {%- if allItems.page == page_num %}
+                                <a href="{{url_for('items.addItem', page=page_num)}}" class="current__page page">{{page_num}}</a>
+                            {% else %}
+                                <a href="{{url_for('items.addItem', page=page_num)}}" class="other__page page">{{page_num}}</a>
+                            {% endif -%}
+
+                        {% else %}
+                            <span style="font-size:1.2em;line-height:1;margin:0 .15em;">........</span>
+
+                        {% endif -%}
+                    {% endfor -%}
+
+                    <!-- for right edge -->
+                    {% if allItems.next_num %}
+                        <a href="{{url_for('items.addItem',page=allItems.next_num)}}" class="other__page page">&gt;</a>
+                    {% endif %}
+
+                {% endif -%}
+            </div>
+            <!-- PAGINATION ENDS HERE -->
+
+        </section>
+    {% endif -%}
+
+</main>
+{% endblock -%}

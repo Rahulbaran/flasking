@@ -1,0 +1,1 @@
+Hi all namaste🙏, This is a flask app which is named "ToDoItems". The app has the functionality of adding new items, editing items and deleting them if not important.

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author-name" content="Rahul Kumar">
+    <meta name="contact" content="rahulkumar109422@gmail.com">
+    <meta name="description" content="This is a flask app which will be hosted on Heroku">
+    <meta name="keywords" content="flask-app, Heroku, flask">
+
+    <!-------------------- application title -------------------->
+    <title>{{title}}</title>
+
+    <!-------------------custom stylesheet -------------------->
+    <link rel="stylesheet" href="../static/css/layout.css">
+
+    <!-- favicon for the application -->
+
+    <!------------------google fonts-------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Quicksand:wght@400;500;600&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-------------------- fontawesome  icons stylesheet ------------------>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-----------------jinja block for adding stylesheet in inherited templates------------ -->
+    {% block stylesheet %}
+    {% endblock %}
+
+</head>
+<body>
+
+        <!-----------------application header-------------->
+        <header>
+
+            <!--------------------application logo------------------->
+            
+    
+            <!-------------------main navigation of the application---------------->
+            <nav class="navigation--main">
+                <ul class="navigation__bar">
+                    <li><a href="{{url_for('main.home')}}" class="navigation__link {{'navigation__active' if active_page=='home' else ''}}">Home</a></li>
+                    {%- if current_user.is_authenticated %}
+                    <li><a href="{{url_for('items.addItem')}}" class="navigation__link {{'navigation__active' if active_page=='addItem' else ''}}">Add Item</a></li>
+                    <li><a href="{{url_for('users.account')}}" class="navigation__link {{'navigation__active' if active_page=='account' else ''}}">Account</a></li>
+                    <li><a href="{{url_for('users.logout')}}" class="navigation__link">Logout</a></li>
+                    {% else %}
+                    <li><a href="{{url_for('users.register')}}" class="navigation__link {{'navigation__active' if active_page=='register' else ''}}">Register</a></li>
+                    <li><a href="{{url_for('users.login')}}" class="navigation__link {{'navigation__active' if active_page=='login' else ''}}">Login</a></li>
+                    {% endif -%}
+                </ul>
+            </nav>
+    
+        </header>
+
+
+        <!-- FLASHING MESSAGES WHEN REQUIRED -->
+        {%- with messages=get_flashed_messages(with_categories=True) %}
+        {%- if messages %}
+        {%- for cat,msg in messages %}
+        <div class="msg--container {{cat}}--msg--container">
+            <span class="msg {{cat}}__msg">{{msg}}</span>
+            <button class="remove__btn {{cat}}__remove__btn">X</button>
+        </div>
+        {% endfor -%}
+        {% endif -%}
+        {% endwith -%}
+
+        {%- block body %}
+        {% endblock -%}
+    
+        <!-------------------application footer-------------------->
+        <footer>
+    
+            <!-------------------other navigation of the application---------------->
+            <nav class="navigation--footer--container">
+                <ul class="navigation__footer">
+                    <li><a href="{{url_for('main.home')}}" class="navigation__footer__link"><i class="fa fa-home"></i> Home</a></li>
+                    {%- if current_user.is_authenticated %}
+                    <li><a href="{{url_for('items.addItem')}}" class="navigation__footer__link"><i class="fa fa-plus-circle"></i> Add Item</a></li>
+                    <li><a href="{{url_for('users.account')}}" class="navigation__footer__link"><i class="fa fa-user"></i> Account</a></li>
+                    <li><a href="{{url_for('users.logout')}}" class="navigation__footer__link"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+                    {% else %}
+                    <li><a href="{{url_for('users.register')}}" class="navigation__footer__link"><i class="fa fa-user-plus"></i> Register</a></li>
+                    <li><a href="{{url_for('users.login')}}" class="navigation__footer__link"><i class="fa fa-sign-in-alt"></i> Login</a></li>
+                    {% endif -%}
+                </ul>
+            </nav>
+
+
+            <div class="copyright__container">
+                <h4 class="copyright__content">Copyright reserved since 2021 by SPARSH</h4>
+            </div>
+        </footer>
+
+        {% block scripts %}
+        {% endblock %}
+        <script>
+
+            /******************Hiding message related functionality********************/
+            const closeBtn = document.querySelector('.remove__btn');
+            const msgContainer = document.querySelector('.msg--container');
+
+            if(msgContainer) {
+                closeBtn.addEventListener('click', () => {
+                    msgContainer.style.display = 'none';
+                });
+            }
+
+        </script>
+</body>
+</html>

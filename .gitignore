@@ -1,0 +1,6 @@
+virtual/
+toDoItems/data.db
+.vscode
+__pycache__
+.env
+.bash_profile

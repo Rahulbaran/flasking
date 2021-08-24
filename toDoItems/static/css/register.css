@@ -1,0 +1,138 @@
+.main--container {
+    background-color:#fff;
+    width:90%;
+    margin:1.5em auto;
+    padding:1em;
+    box-shadow:0 5px 7px rgba(0,0,0,.15);
+    border-radius:7px;
+}
+
+.form {
+    margin-bottom:1em;
+}
+
+.form legend {
+    font-weight:800;
+    font-size:1.35em;
+    margin-bottom:.5em;
+}
+
+.form__group {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    margin-bottom:.25em;
+    width:100%;
+}
+.form__group label{
+    font-weight:600;
+}
+.form__group input{
+    width:100%;
+    border-radius:5px;
+    padding:.6em .75em;
+    font-size:.9em;
+    font-family:'Montserrat',sans-serif;
+    font-weight:500;
+    border:none;
+    outline:none;
+    border:1px solid #bbb;
+    color:hsl(135deg, 95%, 10%);
+}
+.form__group input:focus {
+    outline:1px solid hsl(124deg, 90%, 10%);
+}
+
+.form__gender__group {
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:center;
+}
+.form__gender__group label {
+    margin-right:.5em;
+    font-weight:600;
+}
+.form__gender__group ul {
+    display:flex;
+    list-style-type:none;
+}
+.form__gender__group ul label{
+    font-weight:400;
+}
+.form__gender__group li{
+    margin-left:.5em;
+}
+.form__recaptcha__group {
+    margin-top:.75em;
+}
+
+.form__submit input[type="submit"] {
+    padding:.5em 1em;
+    margin-top:.5em;
+    font-size:1em;
+    font-weight:600;
+    font-family:'Ubuntu',sans-serif;
+    background-color:none;
+    background-color:yellow;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    box-shadow:4px 4px 2px rgba(0,0,0,.2);
+}
+
+.login__link__container p {
+    font-weight:500;
+}
+.login__link {
+    text-decoration:none;
+    font-weight:600;
+    color:hsl(240deg, 90%, 50%);
+}
+.login__link:hover,
+.login__link:focus {
+    text-decoration:2px underline currentColor;
+}
+
+
+
+/****************
+Error fields
+************* */
+.field__error:focus {
+    outline-color:red !important;
+}
+.error__msg {
+    font-size:.7em;
+    font-weight:600;
+    color:rgb(255, 9, 9);
+    
+}
+
+
+
+
+
+/* **************
+MEDIA QUERIES
+***************** */
+@media (min-width:0px) and (max-width:480px) {
+    .main--container {
+        width:90%;   
+    }
+}
+@media (min-width:481px) and (max-width:768px) {
+    .main--container {
+        width:80%;  }
+   }
+@media (min-width:769px) and (max-width:1279px){
+    .main--container {
+        width:70%;
+    }
+}
+@media (min-width:1280px) {
+    .main--container {
+        width:60%;
+    }
+}

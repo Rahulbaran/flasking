@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+{% set active_page='register' %}
+{%- block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/register.css')}}">
+{% endblock -%}
+{%- block body %}
+
+
+<main class="main--container">
+
+    <form method="post" autocomplete="off" class="form">
+        {{form.hidden_tag()}}
+
+        <legend>Registration Form</legend>
+
+        <div class="form__group">
+            {{form.fullname.label}}
+            {%- if form.fullname.errors %}
+            {{form.fullname(class='field__error')}}
+            {%- for error in form.fullname.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            {{form.fullname(placeholder='enter your name')}}
+            {% endif -%}
+        </div>
+
+        <div class="form__group">
+            {{form.username.label}}
+            {%- if form.username.errors %}
+            {{form.username(class='field__error')}}
+            {%- for error in form.username.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            {{form.username(placeholder='enter an username')}}
+            {% endif -%}
+        </div>
+
+        <div class="form__group">
+            {{form.email.label}}
+            {%- if form.email.errors %}
+            {{form.email(class='field__error')}}
+            {%- for error in form.email.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            {{form.email(placeholder='enter your email address')}}
+            {% endif -%}
+        </div>
+
+        <div class="form__group">
+            {{form.dob.label}}
+            {%- if form.dob.errors %}
+            {{form.dob(class='field__error')}}
+            {%- for error in form.dob.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            {{form.dob}}
+            {% endif -%}
+        </div>
+
+        <div class="form__gender__group">
+            {{form.gender.label}}
+            {{form.gender}}
+            {%- if form.gender.errors %}
+            {%- for error in form.gender.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% endif -%}
+        </div>
+
+        <div class="form__group">
+            {{form.password.label}}
+            {%- if form.password.errors %}
+            {{form.password(class='field__error')}}
+            {%- for error in form.password.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            {{form.password(placeholder='enter password')}}
+            {% endif -%}
+        </div>
+
+        <div class="form__group">
+            {{form.confirm_password.label}}
+            {%- if form.confirm_password.errors %}
+            {{form.confirm_password(class='field__error')}}
+            {%- for error in form.confirm_password.errors %}
+            <span class='error__msg'>{{error}}</span>
+            {% endfor -%}
+            {% else %}
+            {{form.confirm_password(placeholder='reenter password')}}
+            {% endif -%}
+        </div>
+
+        <div class="form__recaptcha__group">
+            {{form.recaptcha}}
+        </div>
+
+        <div class="form__submit">
+            {{form.submit}}
+        </div>
+
+    </form>
+
+    <div class="login__link__container">
+        <p>Already have an account<a href="{{url_for('users.login')}}" class="login__link"> login now</a></p>
+    </div>
+
+</main>
+
+{% endblock -%}
+
+{% block scripts %}
+{{super()}}
+{% endblock %}
